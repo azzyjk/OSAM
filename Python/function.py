@@ -17,15 +17,15 @@ def poiPara(address, key):
 	return params
 
 #길찾기 파라미터 만들기
-def pthPara(key):
+def pthPara(end ,key):
     params = { 'version':'1',
                 'appKey':key,
-                'startX':'126.972580', 
-                'startY':'37.409999', 
-                'endX':'126.972620', 
-                'endY':'37.409746',
-                'startName':'%EC%B6%9C%EB%B0%9C',
-                'endName':'%EB%B3%B8%EC%82%AC'
+                'startX':'126.97262048721354', 
+                'startY':'37.409728631742276', 
+                'endX':end[0], 
+                'endY':end[1],
+                'startName':'출발지',
+                'endName':'도착지'
             }
     return params
     
@@ -44,9 +44,9 @@ def notice(direct):
     elif direct==19 or direct==217:
         print('4시')
 
-#다음 가야할 방향 알아내기
-def checkDirect(url ,key):
-    params=pthPara(key)
+#다음 가야할 방향 찾기
+def checkDirect(end, url ,key):
+    params=pthPara(end, key)
     res = requests.post(url['path'],data=params)
     for i in res.json()['features'] :
         check = "turnType" in i['properties']
@@ -58,7 +58,7 @@ def checkDirect(url ,key):
 
 
 
-#POI검색
+#POI검색 후 선택한 위치 정보 반환
 def search(url, param):
     res = requests.get(url['poi'], params=param)
     number = 0

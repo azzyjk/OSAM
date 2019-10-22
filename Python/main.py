@@ -7,6 +7,7 @@ url = {
 
 tkey = mkKey()
 
-lists = findEndPoint(url, tkey)
+endP = findEndPoint(url, tkey)
+checkDirect(endP, url, tkey)
 
-print(lists)
+

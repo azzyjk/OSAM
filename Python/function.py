@@ -6,7 +6,16 @@ def mkKey():
     key = open('C:\\Users\\Admin\\Desktop\\OSAM\\txtfiles\\tmapKey.txt', 'r')
     return key.read()
 
-#길찾기 파라미터값 만들기
+#POI검색 파라미터 만들기
+def poiPara(address, key):
+	params = {'version':'1', 
+            'count':'6',
+            'searchKeyword':address, 
+            'appKey':key
+            }
+	return params
+
+#길찾기 파라미터 만들기
 def pthPara(key):
     params = { 'version':'1',
                 'appKey':key,
@@ -16,7 +25,7 @@ def pthPara(key):
                 'endY':'37.409746',
                 'startName':'%EC%B6%9C%EB%B0%9C',
                 'endName':'%EB%B3%B8%EC%82%AC'
-		  }
+            }
     return params
     
 #방향 알려주기
@@ -37,7 +46,7 @@ def notice(direct):
 #다음 가야할 방향 알아내기
 def checkDirect(url ,key):
     params=pthPara(key)
-    res = requests.post(url,data=params)
+    res = requests.post(url['path'],data=params)
     for i in res.json()['features'] :
         check = "turnType" in i['properties']
         if(check==True and i['properties']['turnType'] !=200):
@@ -47,3 +56,14 @@ def checkDirect(url ,key):
             break
 
 
+
+#POI검색
+def search(url, param):
+    res = requests.get(url['poi'], params=param)
+    number = 0
+    for i in res.json()['searchPoiInfo']['pois']['poi']:
+        print("%d. " %number, i['name'])
+        number+=1
+
+    choose = input("번호를 선택해주세요 : ")
+    return res.json()['searchPoiInfo']['pois']['poi'][int(choose)]

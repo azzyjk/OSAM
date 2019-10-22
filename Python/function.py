@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 #apikey값 가져오기
 def mkKey():
@@ -67,3 +68,18 @@ def search(url, param):
 
     choose = input("번호를 선택해주세요 : ")
     return res.json()['searchPoiInfo']['pois']['poi'][int(choose)]
+
+#목적지검색 후 목적지의 위도, 경도 반환
+def findEndPoint(url, key):
+    os.system("cls")
+    endPt = input("목적지를 입력해 주세요 : ")
+    
+    params = poiPara(endPt, key)
+    res = search(url, params)
+    
+    os.system("cls")
+    endX = res['frontLon']
+    endY = res['frontLat']
+    lists = [endX, endY]
+    return lists
+    

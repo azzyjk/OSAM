@@ -7,8 +7,6 @@ url = {
 
 tkey = mkKey()
 
-address = input("검색할 지명을 입력해 주세요 : ")
+lists = findEndPoint(url, tkey)
 
-res = search(url, poiPara(address, tkey))
-
-print(res)
+print(lists)

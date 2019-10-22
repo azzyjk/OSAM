@@ -7,6 +7,16 @@ def mkKey():
     key = open('C:\\Users\\Admin\\Desktop\\OSAM\\txtfiles\\tmapKey.txt', 'r')
     return key.read()
 
+#지도 누른 곳 위도&경도 가져오기
+def getLocate():
+    read = open('C:\\Users\\Admin\\Desktop\\OSAM\\txtfiles\\location.txt', mode='rt', encoding='utf-8')
+    lonlat=read.readline().split(',')
+    dicts = {
+            'startX':lonlat[1],
+            'startY':lonlat[0]
+            }
+    return dicts
+    
 #POI검색 파라미터 만들기
 def poiPara(address, key):
 	params = {'version':'1', 
@@ -17,13 +27,13 @@ def poiPara(address, key):
 	return params
 
 #길찾기 파라미터 만들기
-def pthPara(end ,key):
+def pthPara(dicts ,key):
     params = { 'version':'1',
                 'appKey':key,
-                'startX':'126.97262048721354', 
-                'startY':'37.409728631742276', 
-                'endX':end[0], 
-                'endY':end[1],
+                'startX':dicts['startX'], 
+                'startY':dicts['startY'], 
+                'endX':dicts['endX'], 
+                'endY':dicts['endY'],
                 'startName':'출발지',
                 'endName':'도착지'
             }
@@ -43,16 +53,19 @@ def notice(direct):
         print('2시')
     elif direct==19 or direct==217:
         print('4시')
+    elif direct==201:
+        print('end')
+    else:
+        print('직진')
 
 #다음 가야할 방향 찾기
-def checkDirect(end, url ,key):
-    params=pthPara(end, key)
+def checkDirect(dicts, url ,key):
+    params=pthPara(dicts, key)
     res = requests.post(url['path'],data=params)
     for i in res.json()['features'] :
         check = "turnType" in i['properties']
         if(check==True and i['properties']['turnType'] !=200):
             direct = i['properties']['turnType']
-            print(direct)
             notice(direct)
             break
 
@@ -78,8 +91,10 @@ def findEndPoint(url, key):
     res = search(url, params)
     
     os.system("cls")
-    endX = res['frontLon']
-    endY = res['frontLat']
-    lists = [endX, endY]
-    return lists
+
+    dicts = {'endX':res['frontLon'],
+            'endY':res['frontLat']
+            }
+            
+    return dicts
     

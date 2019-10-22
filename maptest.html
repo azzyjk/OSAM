@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>simpleMap</title>
+        <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&format=javascript&appkey=appKey입력"></script>
+        <script type="text/javascript">
+			function initTmap(){
+				var map = new Tmapv2.Map("map_div",  
+				{
+					center: new Tmapv2.LatLng(37.41076388172088,126.97240474564735), // 지도 초기 좌표
+					width: "1780px", 
+					height: "800px",
+					zoom: 15
+				});
+				map.addListener("click", onClick);
+			} 
+			function onClick(e){
+			var result =e.latLng; 
+			var resultDiv = document.getElementById("result");
+			resultDiv.innerHTML = result;
+			var fileObject = new ActiveXObject("Scripting.FileSystemObject");
+			fWrite = fileObject.CreateTextFile("C:\\Users\\Admin\\Desktop\\OSAM\\txtfiles\\location.txt",true);
+			fWrite.write(result);
+			fWrite.close();
+			
+			
+		}
+		</script>
+		<p id="result"></p>
+    </head>
+    <body onload="initTmap()">
+        <div id="map_div">
+        </div>        
+    </body>
+</html>	

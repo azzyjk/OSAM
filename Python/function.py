@@ -98,3 +98,8 @@ def findEndPoint(url, key):
             
     return dicts
     
+def locateTracking(end,url, key):
+    dicts=getLocate()
+    dicts.update(end)
+    checkDirect(dicts, url, key)
+    

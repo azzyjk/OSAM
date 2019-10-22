@@ -12,7 +12,6 @@ tkey = mkKey()
 endP = findEndPoint(url, tkey)
 
 while True:
-    dicts=getLocate()
-    dicts.update(endP)
-    checkDirect(dicts, url, tkey)
+    locateTracking(endP, url, tkey)
     time.sleep(1)
+

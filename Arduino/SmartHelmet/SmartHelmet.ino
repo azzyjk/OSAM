@@ -9,7 +9,6 @@ unsigned long curtimemillis; // 현재 시간(밀리 초 단위)
 unsigned long curtimemicros; // 현재 시간(마이크로 초 단위)
 unsigned long ledtimer; // led 점등 시작 시간
 unsigned long usstimer; // 초음파 센서 트리거 시간
-boolean ussstate = 1;
 const int interval = 3000; // 3초
 
 void setup(){
@@ -19,7 +18,6 @@ void setup(){
   pinMode(Rled,OUTPUT);
   pinMode(trig,OUTPUT);
   pinMode(echo,INPUT);
-  digitalWrite(trig,ussstate);
   usstimer = micros();
 }
 
@@ -56,12 +54,14 @@ char val;
     digitalWrite(Rled, LOW);
   }
 //----------------초음파 센서부 (10us 펄스 폭)------------------
+  
+  digitalWrite(trig,HIGH);
+  usstimer = micros();
+  if(curtimemicros-usstimer>=10){
+    digitalWrite(trig,LOW);
+  }
 
-if(curtimemicros-usstimer>=10){
-  ussstate = ~ussstate;
-  digitalWrite(trig,ussstate);
-  usstimer = micros();  
-}
-unsigned long duration;
-
+  unsigned long distance = pulseIn(echo,HIGH)*34000/1000000/2; //음속은 340m/s이므로 시간을 곱한 후 cm단위로 환산, 왕복하는데 걸린 시간이므로 2로 나눠줌
+  Serial.print(distance);
+  Serial.println("CM");
 }

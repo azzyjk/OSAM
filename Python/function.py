@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import serial
 
 #apikey값 가져오기
 def mkKey():
@@ -41,22 +42,18 @@ def pthPara(dicts ,key):
     
 #방향 알려주기
 def notice(direct):
+    arduino = serial.Serial('COM9', 9600)
+    val=None;
     if direct==12 or direct==212:
-        print('left')
+        val='l'
     elif direct==13 or direct==213:
-        print('right')
-    elif direct==16 or direct==214:
-        print('8시')
-    elif direct==17 or direct==215:
-        print('10시')
-    elif direct==18 or direct==216:
-        print('2시')
-    elif direct==19 or direct==217:
-        print('4시')
+        val='r'
     elif direct==201:
-        print('end')
+        val='e'
     else:
-        print('직진')
+        val='s'
+    val=val.encode('utf-8')
+    arduino.write(val)
 
 #다음 가야할 방향 찾기
 def checkDirect(dicts, url ,key):
@@ -64,11 +61,10 @@ def checkDirect(dicts, url ,key):
     res = requests.post(url['path'],data=params)
     for i in res.json()['features'] :
         check = "turnType" in i['properties']
-        if(check==True and i['properties']['turnType'] !=200):
+        if(check==True and i['properties']['turnType'] !=200):  #출발지 분류 코드 넘어가기
             direct = i['properties']['turnType']
             notice(direct)
             break
-
 
 
 #POI검색 후 선택한 위치 정보 반환

@@ -1,17 +1,22 @@
 #include <SoftwareSerial.h>
 #define Lled 5
 #define Rled 6
+#define echo 12
+#define trig 13
 
 SoftwareSerial BT(8, 9); // 8번 TX, 9번 RX
-unsigned long curtime;
-unsigned long pretime;
-const int interval = 3000;
+unsigned long curtime; // 현재 시간
+unsigned long ledtimer; // led 점등 시작 시간
+unsigned long usstimer; // 초음파 센서 트리거 시간
+const int interval = 3000; // 3초
 
 void setup(){
   Serial.begin(9600);
   BT.begin(9600);
-  pinMode(4,OUTPUT);
-  digitalWrite(4,LOW);
+  pinMode(Lled,OUTPUT);
+  pinMode(Rled,OUTPUT);
+  pinMode(trig,OUTPUT);
+  pinMode(echo,INPUT);
 }
 
 void loop(){
@@ -19,19 +24,30 @@ curtime = millis();
 char a;
   
   if(BT.available()){
-    a = BT.read();
-    Serial.println(a);
-    if(a=='a'){
-      digitalWrite(4, HIGH);
-      pretime = millis();
+    val = BT.read();
+  Serial.println(val);
+  //방향에 따른 LED 점등
+  if(val=='l'){ //left
+    digitalWrite(Lled, HIGH);
+    ledtimer = millis();
+    }
+  else if(val=='r'){ //right
+    digitalWrite(Rled, HIGH);
+    ledtimer = millis();
+    }
+  else if(val=='s'){ //straight
+    digitalWrite(Rled, HIGH);
+    digitalWrite(Lled, HIGH);
+    ledtimer = millis();
     }
   }
-  
+ 
   if(Serial.available()){
     BT.write(Serial.read());
   }
 
-  if(curtime-pretime>=interval){ // 3초 지나면 끔
-    digitalWrite(4, LOW); 
+  if(curtime-ledtimer>=interval){ // 3초 지나면 LED 소등
+    digitalWrite(Lled, LOW);
+    digitalWrite(Rled, LOW);
   }
 }

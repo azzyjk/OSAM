@@ -1,32 +1,44 @@
-<html>
+﻿<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>simpleMap</title>
         <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&format=javascript&appkey=appKey입력"></script>
-        <script type="text/javascript">
+        <script>									
+			var map,marker;
+			var lonlat;
+			var markers = [];
+
 			function initTmap(){
-				var map = new Tmapv2.Map("map_div",  
-				{
-					center: new Tmapv2.LatLng(37.41076388172088,126.97240474564735), // 지도 초기 좌표
-					width: "1780px", 
-					height: "800px",
-					zoom: 15
+				map = new Tmapv2.Map("map_div", {
+				center: new Tmapv2.LatLng(37.41016155000323,126.97247385978741), // 지도 초기 좌표
+				width: "100%", 
+				height: "100%", 
+				zoom: 17
 				});
-				map.addListener("click", onClick);
-			} 
+			
+			map.addListener("click", onClick);
+		
+		
+			}     
+
 			function onClick(e){
-			var result =e.latLng; 
-			var resultDiv = document.getElementById("result");
-			resultDiv.innerHTML = result;
+				lonlat = e.latLng;
+		
+				marker = new Tmapv2.Marker({
+					position: new Tmapv2.LatLng(lonlat.lat(),lonlat.lng()),
+					map: map
+				});
+		  
+				markers.push(marker);
 			var fileObject = new ActiveXObject("Scripting.FileSystemObject");
 			fWrite = fileObject.CreateTextFile("C:\\Users\\Admin\\Desktop\\OSAM\\txtfiles\\location.txt",true);
-			fWrite.write(result);
+			fWrite.write(lonlat);
 			fWrite.close();
-			
-			
-		}
-		</script>
-		<p id="result"></p>
+			}
+	
+	initTmap();
+</script>
+<p id="result"></p>
     </head>
     <body onload="initTmap()">
         <div id="map_div">

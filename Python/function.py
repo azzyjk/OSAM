@@ -42,18 +42,18 @@ def pthPara(dicts ,key):
     
 #방향 알려주기
 def notice(direct):
-    arduino = serial.Serial('COM7', 9600)
+    arduino = serial.Serial('COM9', 9600)
     val=None;
     if direct==12 or direct==212:
         val='l'
     elif direct==13 or direct==213:
         val='r'
     elif direct==201:
-        print('end')
+        val='e'
     else:
         val='s'
-    a=a.encode('utf-8')
-    arduino.write(a)
+    val=val.encode('utf-8')
+    arduino.write(val)
 
 #다음 가야할 방향 찾기
 def checkDirect(dicts, url ,key):

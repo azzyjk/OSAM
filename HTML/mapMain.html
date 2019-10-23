@@ -15,6 +15,12 @@
 				height: "100%", 
 				zoom: 17
 				});
+				
+			var marker = new Tmapv2.Marker({
+				position: new Tmapv2.LatLng(37.41073763420311,126.9723882079129),
+				icon: "C:\\Users\\Admin\\Desktop\\test\\twitter.png",
+				map: map
+			});
 			
 			map.addListener("click", onClick);
 		

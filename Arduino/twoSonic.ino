@@ -4,8 +4,8 @@
 #define RX 3
 #define Lled 4
 #define Rled 5
-#define bLled 6
-#define bRled 7
+#define BLled 6
+#define BRled 7
 
 #define buzzer 9
 #define echoB 10
@@ -28,8 +28,8 @@ void setup(){
     BT.begin(9600);
     pinMode(Lled,OUTPUT);
     pinMode(Rled,OUTPUT);
-    pinMode(bRled,OUTPUT);
-    pinMode(bLled,OUTPUT);
+    pinMode(BRled,OUTPUT);
+    pinMode(BLled,OUTPUT);
   
     pinMode(trigF,OUTPUT);
     pinMode(echoF,INPUT);

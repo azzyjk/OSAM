@@ -67,7 +67,7 @@ void loop(){
       digitalWrite(BRled,HIGH);
     }
     else{
-       digitalWrite(RledR,HIGH);
+       
     }
   }
  
@@ -93,16 +93,15 @@ void loop(){
    }
   
    unsigned long distanceB = pulseIn(echoB,HIGH)*34000/1000000/2;
-   soundB = map(distanceB, 0, 80, 0, 10);
 
    Serial.println(distanceB);
    
-   /*
+   
    if(distance <= 80){
     TimerFreeTone(buzzer, 1517, 10, 10-sound);
    }
    if(distanceB <= 80){
-    TimerFreeTone(buzzer, 1517, 10, 10-soundB);
+    digitalWrite(RledR,HIGH);
    }
-   */
+   
 }

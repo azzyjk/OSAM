@@ -1,14 +1,13 @@
 #include <TimerFreeTone.h>
 #include <SoftwareSerial.h>
-#define Lled 0
-#define LledR 1
+
 #define TX 2
 #define RX 3
 #define Rled 4
 #define RledR 5
 #define BLled 6
 #define BRled 7
-
+#define Lled 8
 #define buzzer 9
 #define echoB 10
 #define trigB 11
@@ -32,7 +31,6 @@ void setup(){
     pinMode(Rled,OUTPUT);
     pinMode(BRled,OUTPUT);
     pinMode(BLled,OUTPUT);
-    pinMode(LledR, OUTPUT);
     pinMode(RledR, OUTPUT);
     pinMode(trigF,OUTPUT);
     pinMode(echoF,INPUT);
@@ -47,7 +45,6 @@ void loop(){
   char val;
   if(BT.available()){
     digitalWrite(Lled,LOW);
-    digitalWrite(LledR,LOW);
     digitalWrite(Rled,LOW);
     digitalWrite(RledR,LOW);
     digitalWrite(BLled,LOW);
@@ -70,7 +67,6 @@ void loop(){
       digitalWrite(BRled,HIGH);
     }
     else{
-      digitalWrite(LledR,HIGH);
        digitalWrite(RledR,HIGH);
     }
   }

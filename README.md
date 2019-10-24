@@ -45,6 +45,7 @@
   * ###  프로젝트 관리
   
     > * [kanban]( https://github.com/azzyjk/OSAM/projects/3 )
+    > * [github]( https://github.com/azzyjk/OSAM )
   
   * ### Arduino
   

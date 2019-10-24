@@ -31,7 +31,7 @@
 
   
 
-* ### 딸랑이의 기능
+* ### [딸랑이의 기능]( https://www.youtube.com/watch?v=rRna2M-bgyU )
   
    > 1. 앞에 사람과 거리가 가까워지면 벨을 울려줌
    >
@@ -70,12 +70,12 @@
 
   ![BlockDiagram.PNG](https://github.com/azzyjk/OSAM/blob/master/BlockDiagram.PNG?raw=true)
 
-* ## 사용법
+* ## [사용법]( https://www.youtube.com/watch?v=_9JG-y93Dr8 )
 
   >1. main.py를 실행시킨 후 목적지를 입력한다
   >2. mapMain.html을 실행하여 자신의 현재위치를 지도에 찍는다
   
-  시연영상
+  
 
 * ## 팀원소개
 

@@ -32,7 +32,8 @@ void setup(){
     pinMode(Rled,OUTPUT);
     pinMode(BRled,OUTPUT);
     pinMode(BLled,OUTPUT);
-  
+    pinMode(LledR, OUTPUT);
+    pinMode(RledR, OUTPUT);
     pinMode(trigF,OUTPUT);
     pinMode(echoF,INPUT);
     pinMode(trigB,OUTPUT);
@@ -46,7 +47,9 @@ void loop(){
   char val;
   if(BT.available()){
     digitalWrite(Lled,LOW);
+    digitalWrite(LledR,LOW);
     digitalWrite(Rled,LOW);
+    digitalWrite(RledR,LOW);
     digitalWrite(BLled,LOW);
     digitalWrite(BRled,LOW);
     
@@ -67,7 +70,8 @@ void loop(){
       digitalWrite(BRled,HIGH);
     }
     else{
-      
+      digitalWrite(LledR,HIGH);
+       digitalWrite(RledR,HIGH);
     }
   }
  

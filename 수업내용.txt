@@ -1,0 +1,16 @@
+Tool Chain
+1. Cross-Compiler ex)arduino
+2. Sys Library
+3. Binary Utilites(개발환경)
+펌웨어 - 구워넣는 프로그램
+Over-The Air
+
+Project
+Specific - function
+Measurable  
+A
+R
+Time
+레지스터 컨트롤레지스터
+어느분야에 관심있는지
+학교과제도 github에 올리기

@@ -36,7 +36,12 @@
    > 1. 앞에 사람과 거리가 가까워지면 벨을 울려줌
    >
    > 2. 뒤에 사람이 다가오고 있으면 LED를 통해 경고해줌
+   >
    > 3. 실시간 네비게이션 기능
+   >
+   >    * 사용자에게 LED로 다음 가야할 방향을 알려줌
+   >
+   >    * 자신의 뒷사랆에게 LED를 통해 방향을 알려줌
 
 ## 프로젝트 구현
 
@@ -44,7 +49,7 @@
 
   * ###  프로젝트 관리
   
-    > * [kanban]( https://github.com/azzyjk/OSAM/projects/3 )
+    > * [khanban]( https://github.com/azzyjk/OSAM/projects/3 )
     > * [github]( https://github.com/azzyjk/OSAM )
   
   * ### Arduino
